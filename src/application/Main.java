@@ -1,18 +1,23 @@
 package application;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public synchronized void start(Stage primaryStage) {
+    public synchronized void start(Stage stage) {
 	try {
-	    BorderPane root = new BorderPane();
-	    Scene scene = new Scene(root, 400, 400);
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
+	    ScrollPane node = FXMLLoader.load(getClass().getResource("/gui/IndexView.fxml"));
+	    
+	    node.setFitToHeight(true);
+	    node.setFitToWidth(true);
+	    
+	    Scene scene = new Scene(node);
+	    stage.setScene(scene);
+	    stage.show();
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
