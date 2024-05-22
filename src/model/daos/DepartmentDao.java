@@ -16,7 +16,7 @@ import model.interfaces.IEntityDao;
 public final class DepartmentDao implements IEntityDao<Department> {
     protected DepartmentDao() {
     }
-    
+
     @Override
     public Department convert(Integer id, ResultSet rs) {
 	try {
@@ -55,7 +55,7 @@ public final class DepartmentDao implements IEntityDao<Department> {
 		PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 	    st.setString(1, obj.getName());
 
-	    if (st.executeUpdate() == 0) 
+	    if (st.executeUpdate() == 0)
 		throw new DaoException("Failed to insert department: " + obj);
 
 	    try (ResultSet rs = st.getGeneratedKeys()) {

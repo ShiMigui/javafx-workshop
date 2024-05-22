@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public synchronized void start(Stage stage) {
+    public void start(Stage stage) {
 	try {
 	    ScrollPane node = FXMLLoader.load(getClass().getResource("/gui/IndexView.fxml"));
-	    
+
 	    node.setFitToHeight(true);
 	    node.setFitToWidth(true);
-	    
+
 	    Scene scene = new Scene(node);
 	    stage.setScene(scene);
 	    stage.show();
