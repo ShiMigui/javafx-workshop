@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import model.exceptions.DatabaseException;
+
 public final class Database {
     private static Connection con;
 
@@ -17,7 +19,7 @@ public final class Database {
     }
 
     public static Connection getConnection() throws SQLException {
-	if (con == null) {
+	if (con == null || con.isClosed()) {
 	    Properties props = loadProps();
 	    con = DriverManager.getConnection(props.getProperty("url"), props);
 	}
@@ -50,6 +52,7 @@ public final class Database {
 		rs.close();
 	    if (st != null && !st.isClosed())
 		st.close();
+	    closeConnection();
 	} catch (SQLException e) {
 	    throw new DatabaseException("Cannot close", e.getMessage());
 	}

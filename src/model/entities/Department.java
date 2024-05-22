@@ -6,9 +6,17 @@ import model.interfaces.IEntity;
 
 public final class Department implements IEntity {
     private static final long serialVersionUID = 1L;
-    
+
     private Integer id;
     private String name;
+
+    public Department() {
+    }
+
+    public Department(Integer id, String name) {
+	this.id = id;
+	setName(name);
+    }
 
     @Override
     public Integer getId() {
@@ -39,7 +47,7 @@ public final class Department implements IEntity {
 	Department other = (Department) obj;
 	return id.equals(other.getId());
     }
-    
+
     @Override
     public String toString() {
 	return "Department(" + id + ") [name=" + name + "]";
