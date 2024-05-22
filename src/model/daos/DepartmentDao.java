@@ -78,7 +78,7 @@ public final class DepartmentDao implements IEntityDao<Department> {
 	    st.setInt(2, obj.getId());
 
 	    if (st.executeUpdate() == 0)
-		throw new DaoException("Unexpected Error: Cannot insert " + obj);
+		throw new DaoException("Unexpected Error: Cannot update " + obj);
 	} catch (SQLException e) {
 	    throw new DaoException("Unexpected Error: " + e.getMessage());
 	}

@@ -2,7 +2,7 @@ USE javafxSellerDB;
 
 INSERT INTO department (nm_department) VALUES ("Computers"), ("Toys"), ("Games"), ("Movies");
 
-INSERT INTO seller (nm_email, nm_seller, dt_aniversario, vl_salario, cd_department) VALUES
+INSERT INTO seller (nm_email, nm_seller, dt_birth, vl_salary, cd_department) VALUES
 ('john.doe@computers.com', 'John Doe', '1985-05-15', 50000.00, 1),
 ('jane.smith@computers.com', 'Jane Smith', '1990-07-22', 52000.00, 1),
 ('alex.jones@toys.com', 'Alex Jones', '1988-03-11', 48000.00, 2),

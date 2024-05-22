@@ -20,7 +20,7 @@ public final class Department implements IEntity {
 
     @Override
     public Integer getId() {
-	return null;
+	return id;
     }
 
     public void setId(Integer id) {

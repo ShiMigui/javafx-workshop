@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
-    public void start(Stage primaryStage) {
+    public synchronized void start(Stage primaryStage) {
 	try {
 	    BorderPane root = new BorderPane();
 	    Scene scene = new Scene(root, 400, 400);

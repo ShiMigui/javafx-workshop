@@ -15,6 +15,22 @@ public final class Seller implements IEntity {
 
     private Department department;
 
+    public Seller(Integer id) {
+	this.setId(id);
+    }
+
+    public Seller() {
+    }
+
+    public Seller(Integer id, String email, String name, Date birthDate, Double salary, Department department) {
+	this.setId(id);
+	this.setEmail(email);
+	this.setName(name);
+	this.setBirthDate(birthDate);
+	this.setSalary(salary);
+	this.setDepartment(department);
+    }
+
     @Override
     public Integer getId() {
 	return id;
@@ -29,7 +45,7 @@ public final class Seller implements IEntity {
     }
 
     public void setEmail(String email) {
-	this.email = normalize(email);
+	this.email = normalize(email).toLowerCase();
     }
 
     public String getName() {
@@ -37,7 +53,7 @@ public final class Seller implements IEntity {
     }
 
     public void setName(String name) {
-	this.name = name;
+	this.name = normalize(name).toUpperCase();
     }
 
     public Date getBirthDate() {
@@ -63,7 +79,7 @@ public final class Seller implements IEntity {
     public void setDepartment(Department department) {
 	this.department = department;
     }
-    
+
     @Override
     public int hashCode() {
 	return Objects.hash(id);
