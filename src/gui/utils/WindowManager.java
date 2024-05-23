@@ -17,6 +17,9 @@ public class WindowManager {
 
     public void window(String relative, String name, Stage owner, Consumer<Stage> config) {
 	try {
+	    if(stage == null)
+		stage = new Stage();
+	    
 	    loader.getResource(relative);
 	    Parent node = loader.load();
 
@@ -24,7 +27,7 @@ public class WindowManager {
 	    stage.initOwner(owner);
 	    stage.setScene(new Scene(node));
 
-	    config.accept(owner);
+	    config.accept(stage);
 	} catch (IOException e) {
 	    Alerts.showAlert(AlertType.ERROR, "Cannot load resource", e.getMessage());
 	}
@@ -43,5 +46,9 @@ public class WindowManager {
 
     public Stage getWindow() {
 	return stage;
+    }
+
+    public void showAndWait() {
+	stage.showAndWait();
     }
 }

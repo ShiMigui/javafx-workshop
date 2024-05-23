@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import gui.interfaces.IListController;
 import gui.utils.IndexContentManager;
+import gui.utils.WindowManager;
+import gui.views.modal.EntityFormController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -16,6 +18,8 @@ import model.services.ServiceFactory;
 
 public class DepartmentListController implements IListController<Department> {
     private IEntityService<Department> service;
+    private WindowManager wm;
+    private Department auxDepartmentBtnNew;
 
     @FXML
     private Button btnNew;
@@ -33,6 +37,7 @@ public class DepartmentListController implements IListController<Department> {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 	service = ServiceFactory.getDepartmentService();
+	wm = new WindowManager();
 	intializeNodes();
 	updateTable();
     }
@@ -47,12 +52,34 @@ public class DepartmentListController implements IListController<Department> {
 
     @Override
     public void loadFormWindow(Department obj, String windowName) {
+	try {
+	    if (wm.getWindow() == null)
+		wm.windowModal("/gui/views/modal/DepartmentFormView.fxml", windowName);
+
+	    EntityFormController<Department> controller = wm.getController();
+	    controller.setService(this.getService());
+	    controller.setMyStage(wm.getWindow());
+	    controller.setDataChanged(this);
+	    controller.setAuxEntity(obj);
+
+	    wm.showAndWait();
+	} catch (RuntimeException e) {
+	    e.printStackTrace();
+	    System.out.println(e.getMessage());
+	}
     }
 
     @FXML
     @Override
     public void onBtnNewAction() {
-	System.out.println("Btn new click!");
+	if (auxDepartmentBtnNew == null) {
+	    auxDepartmentBtnNew = new Department();
+	} else {
+	    auxDepartmentBtnNew.setId(null);
+	    auxDepartmentBtnNew.setName("");
+	}
+
+	this.loadFormWindow(auxDepartmentBtnNew, "New Department");
     }
 
     @Override
