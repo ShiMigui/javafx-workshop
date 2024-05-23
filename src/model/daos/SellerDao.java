@@ -6,39 +6,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import model.database.Database;
-import model.entities.Department;
 import model.entities.Seller;
 import model.exceptions.DaoException;
 import model.interfaces.IEntityDao;
+import model.localdata.LocalDataFactory;
+import model.localdata.SellerLocalData;
 
 public class SellerDao implements IEntityDao<Seller> {
-    private static Map<Integer, Department> deps = new HashMap<>();
-
     protected SellerDao() {
     }
 
     @Override
     public Seller convert(Integer id, ResultSet rs) {
+	SellerLocalData local = LocalDataFactory.getLocalSellers();
 	try {
-	    Seller obj = new Seller();
-	    obj.setId(id);
-	    obj.setName(rs.getString("nm_seller"));
-	    obj.setEmail(rs.getString("nm_email"));
-	    obj.setBirthDate(rs.getDate("dt_birth"));
-	    obj.setSalary(rs.getDouble("vl_salary"));
+	    String name = rs.getString("nm_seller");
+	    String email = rs.getString("nm_email");
+	    Date birth = rs.getDate("dt_birth");
+	    Double salary = rs.getDouble("vl_salary");
+	    Integer departmentId = rs.getInt("cd_department");
 
-	    Integer cd = rs.getInt("cd_department");
-	    Department dep = deps.get(cd);
-	    if (dep == null) {
-		dep = DaoFactory.getDepartmentDao().convert(cd, rs);
-		deps.put(cd, dep);
+	    Seller obj = local.get(id);
+	    if (obj == null) {
+		obj = new Seller();
+		obj.setId(id);
+		local.put(obj);
 	    }
-	    obj.setDepartment(dep);
+
+	    obj.setName(name);
+	    obj.setEmail(email);
+	    obj.setBirthDate(birth);
+	    obj.setSalary(salary);
+	    obj.setDepartment(DaoFactory.getDepartmentDao().convert(departmentId, rs));
 
 	    return obj;
 	} catch (SQLException e) {
@@ -139,9 +142,5 @@ public class SellerDao implements IEntityDao<Seller> {
 	} catch (SQLException e) {
 	    throw new DaoException("Cannot delete Seller(" + id + "): " + e.getMessage());
 	}
-    }
-
-    public Map<Integer, Department> getDepartments() {
-	return deps;
     }
 }
