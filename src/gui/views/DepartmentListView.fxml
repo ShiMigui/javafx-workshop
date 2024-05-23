@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.views.DepartmentListController">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+        <items>
+          <Button fx:id="btnNew" mnemonicParsing="false" onAction="#onBtnNewAction" text="New" />
+        </items>
+      </ToolBar>
+      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="tbColumnId" prefWidth="40.0" text="#" />
+          <TableColumn fx:id="tbColumnName" prefWidth="150.0" text="Name" />
+            <TableColumn fx:id="tbColumnEdit" prefWidth="75.0" />
+            <TableColumn fx:id="tbColumnRemove" prefWidth="75.0" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

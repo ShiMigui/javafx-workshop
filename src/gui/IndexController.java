@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import gui.controllers.IController;
+import gui.utils.IndexContentManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 
@@ -22,7 +23,7 @@ public class IndexController implements IController {
 
     @FXML
     private void onItmDepartmentsAction() {
-	System.out.println("Item departments click!");
+	IndexContentManager.loadContent("/gui/views/DepartmentListView.fxml", "Department's list");
     }
 
     @FXML
