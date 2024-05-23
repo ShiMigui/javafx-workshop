@@ -139,6 +139,8 @@ public class SellerDao implements IEntityDao<Seller> {
 
 	    if (st.executeUpdate() == 0)
 		throw new DaoException("Unexpected error: Cannot delete Seller(" + id + ")!");
+
+	    LocalDataFactory.getLocalSellers().remove(id);
 	} catch (SQLException e) {
 	    throw new DaoException("Cannot delete Seller(" + id + "): " + e.getMessage());
 	}

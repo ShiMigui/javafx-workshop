@@ -122,6 +122,8 @@ public final class DepartmentDao implements IEntityDao<Department> {
 
 	    if (st.executeUpdate() == 0)
 		throw new DaoException("Unexpected error: Cannot delete department(" + id + ")!");
+	    
+	    LocalDataFactory.getLocalDepartments().remove(id);
 	} catch (SQLException e) {
 	    throw new DaoException("Cannot delete department(" + id + "): " + e.getMessage());
 	}

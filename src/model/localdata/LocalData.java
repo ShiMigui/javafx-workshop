@@ -33,6 +33,8 @@ public class LocalData<E extends IEntity> {
 	if(obj == null)
 	    throw new NullPointerException("There is not an object with id = " + id);
 	
+	map.remove(id);
+	
 	return obj;
     }
     
