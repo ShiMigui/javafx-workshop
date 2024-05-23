@@ -3,24 +3,15 @@ package gui.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import gui.interfaces.IListController;
-import gui.utils.IndexContentManager;
-import gui.utils.WindowManager;
-import gui.views.modal.EntityFormController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.entities.Department;
-import model.interfaces.IEntityService;
 import model.services.ServiceFactory;
 
-public class DepartmentListController implements IListController<Department> {
-    private IEntityService<Department> service;
-    private WindowManager wm;
-    private Department auxDepartmentBtnNew;
-
+public class DepartmentListController extends EntityListController<Department> {
     @FXML
     private Button btnNew;
     @FXML
@@ -36,67 +27,36 @@ public class DepartmentListController implements IListController<Department> {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-	service = ServiceFactory.getDepartmentService();
-	wm = new WindowManager();
-	intializeNodes();
-	updateTable();
+	super.initialize(url, rb);
+	this.setService(ServiceFactory.getDepartmentService());
     }
 
     @Override
     public void intializeNodes() {
-	this.tbColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-	this.tbColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-	table.prefHeightProperty().bind(IndexContentManager.getStage().heightProperty());
+	super.intializeNodes();
+	tbColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+	tbColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
     }
 
-    @Override
-    public void loadFormWindow(Department obj, String windowName) {
-	try {
-	    if (wm.getWindow() == null)
-		wm.windowModal("/gui/views/modal/DepartmentFormView.fxml", windowName);
-
-	    EntityFormController<Department> controller = wm.getController();
-	    controller.setService(this.getService());
-	    controller.setMyStage(wm.getWindow());
-	    controller.setDataChanged(this);
-	    controller.setAuxEntity(obj);
-
-	    wm.showAndWait();
-	} catch (RuntimeException e) {
-	    e.printStackTrace();
-	    System.out.println(e.getMessage());
-	}
+    protected String getRelativeFormView() {
+	return "/gui/views/modal/DepartmentFormView.fxml";
     }
 
     @FXML
     @Override
-    public void onBtnNewAction() {
-	if (auxDepartmentBtnNew == null) {
-	    auxDepartmentBtnNew = new Department();
+    protected void onBtnNewAction() {
+	if (auxEntityBtnNew == null) {
+	    auxEntityBtnNew = new Department();
 	} else {
-	    auxDepartmentBtnNew.setId(null);
-	    auxDepartmentBtnNew.setName("");
+	    auxEntityBtnNew.setId(null);
+	    auxEntityBtnNew.setName("");
 	}
 
-	this.loadFormWindow(auxDepartmentBtnNew, "New Department");
+	this.loadFormWindow(auxEntityBtnNew, "New Department");
     }
 
     @Override
-    public IEntityService<Department> getService() {
-	if (service == null)
-	    throw new NullPointerException("Service was null!");
-
-	return service;
-    }
-
-    @Override
-    public TableView<Department> getTable() {
+    protected TableView<Department> getTable() {
 	return table;
-    }
-
-    @Override
-    public void onDataChanged() {
-	updateTable();
     }
 }
