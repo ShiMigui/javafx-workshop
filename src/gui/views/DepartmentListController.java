@@ -67,4 +67,9 @@ public class DepartmentListController implements IListController<Department> {
     public TableView<Department> getTable() {
 	return table;
     }
+
+    @Override
+    public void onDataChanged() {
+	updateTable();
+    }
 }

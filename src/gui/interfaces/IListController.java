@@ -5,7 +5,7 @@ import javafx.scene.control.TableView;
 import model.interfaces.IEntity;
 import model.interfaces.IEntityService;
 
-public interface IListController<E extends IEntity> extends IController {
+public interface IListController<E extends IEntity> extends IDataChangedController {
     void intializeNodes();
 
     default void updateTable() {
