@@ -12,6 +12,8 @@ import model.database.Database;
 import model.entities.Department;
 import model.exceptions.DaoException;
 import model.interfaces.IEntityDao;
+import model.localdata.DepartmentLocalData;
+import model.localdata.LocalDataFactory;
 
 public final class DepartmentDao implements IEntityDao<Department> {
     protected DepartmentDao() {
@@ -19,10 +21,19 @@ public final class DepartmentDao implements IEntityDao<Department> {
 
     @Override
     public Department convert(Integer id, ResultSet rs) {
-	try {
-	    Department obj = new Department();
-	    obj.setId(id);
-	    obj.setName(rs.getString("nm_department"));
+	DepartmentLocalData local = LocalDataFactory.getLocalDepartments();
+	try {	    
+	    String name = rs.getString("nm_department");
+	    
+	    Department obj = local.get(id);
+	    if(obj == null) {
+		obj = new Department();
+		obj.setId(id);
+		local.put(obj);
+	    }
+	    
+	    obj.setName(name);
+	    
 	    return obj;
 	} catch (SQLException e) {
 	    throw new DaoException("Cannot convert ResultSet: " + e.getMessage());
