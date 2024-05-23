@@ -3,7 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import gui.controllers.IController;
+import gui.interfaces.IController;
 import gui.utils.IndexContentManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;

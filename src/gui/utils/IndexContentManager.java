@@ -2,6 +2,7 @@ package gui.utils;
 
 import java.io.IOException;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -63,7 +64,7 @@ public class IndexContentManager {
 	return stage.getScene();
     }
 
-    public static ViewLoader getLoader() {
-	return loader;
+    public static FXMLLoader getLoader() {
+	return loader.getLoader();
     }
 }

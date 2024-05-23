@@ -3,9 +3,8 @@ package gui.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import gui.controllers.IController;
+import gui.interfaces.IListController;
 import gui.utils.IndexContentManager;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -15,7 +14,7 @@ import model.entities.Department;
 import model.interfaces.IEntityService;
 import model.services.ServiceFactory;
 
-public class DepartmentListController implements IController {
+public class DepartmentListController implements IListController<Department> {
     private IEntityService<Department> service;
 
     @FXML
@@ -38,22 +37,34 @@ public class DepartmentListController implements IController {
 	updateTable();
     }
 
-    private void updateTable() {
-	if (service == null)
-	    throw new NullPointerException("Service was null!");
-
-	table.setItems(FXCollections.observableArrayList(service.findAll()));
-    }
-
-    private void intializeNodes() {
+    @Override
+    public void intializeNodes() {
 	this.tbColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 	this.tbColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
 	table.prefHeightProperty().bind(IndexContentManager.getStage().heightProperty());
     }
 
+    @Override
+    public void loadFormWindow(Department obj, String windowName) {
+    }
+
     @FXML
-    private void onBtnNewAction() {
+    @Override
+    public void onBtnNewAction() {
 	System.out.println("Btn new click!");
+    }
+
+    @Override
+    public IEntityService<Department> getService() {
+	if (service == null)
+	    throw new NullPointerException("Service was null!");
+
+	return service;
+    }
+
+    @Override
+    public TableView<Department> getTable() {
+	return table;
     }
 }
