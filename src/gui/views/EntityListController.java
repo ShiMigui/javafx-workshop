@@ -65,6 +65,7 @@ public abstract class EntityListController<E extends IEntity> implements IDataCh
 	    wm.showAndWait();
 	} catch (RuntimeException e) {
 	    Alerts.showAlert(AlertType.ERROR, "Cannot load resources", e.getMessage());
+	    e.printStackTrace();
 	}
     }
 
