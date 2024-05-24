@@ -28,7 +28,7 @@ public class IndexController implements IController {
 
     @FXML
     private void onItmSellersAction() {
-	System.out.println("Item sellers click!");
+	IndexContentManager.loadContent("/gui/views/SellerListView.fxml", "Seller's list");
     }
 
     @FXML
