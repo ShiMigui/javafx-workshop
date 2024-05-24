@@ -45,7 +45,7 @@ public class SellerListController extends EntityListController<Seller> {
 	super.intializeNodes();
 	tbColumnSalary.setCellFactory(param -> new FormatDoubleCell<>());
 	tbColumnBirthDate.setCellFactory(param -> new FormatDateCell<>());
-	
+
 	tbColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 	tbColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 	tbColumnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -60,16 +60,17 @@ public class SellerListController extends EntityListController<Seller> {
     @FXML
     @Override
     protected void onBtnNewAction() {
-	if (auxEntityBtnNew == null) {
-	    auxEntityBtnNew = new Seller();
+	if (entityBtnNew == null) {
+	    entityBtnNew = new Seller();
+	    entityBtnNew.setBirthDate(new Date());
 	} else {
-	    auxEntityBtnNew.setId(null);
-	    auxEntityBtnNew.setName("");
-	    auxEntityBtnNew.setEmail("");
-	    auxEntityBtnNew.setSalary(0.0);
+	    entityBtnNew.setId(null);
+	    entityBtnNew.setName("");
+	    entityBtnNew.setEmail("");
+	    entityBtnNew.setSalary(0.0);
 	}
 
-	this.loadFormWindow(auxEntityBtnNew, "New seller");
+	this.loadFormWindow(entityBtnNew, "New seller");
     }
 
     @Override

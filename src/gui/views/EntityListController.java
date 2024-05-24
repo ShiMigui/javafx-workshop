@@ -23,7 +23,7 @@ import model.interfaces.IEntityService;
 
 public abstract class EntityListController<E extends IEntity> implements IDataChangedController {
     private IEntityService<E> service;
-    protected E auxEntityBtnNew;
+    protected E entityBtnNew;
     private WindowManager wm;
 
     @Override

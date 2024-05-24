@@ -45,14 +45,14 @@ public class DepartmentListController extends EntityListController<Department> {
     @FXML
     @Override
     protected void onBtnNewAction() {
-	if (auxEntityBtnNew == null) {
-	    auxEntityBtnNew = new Department();
+	if (entityBtnNew == null) {
+	    entityBtnNew = new Department();
 	} else {
-	    auxEntityBtnNew.setId(null);
-	    auxEntityBtnNew.setName("");
+	    entityBtnNew.setId(null);
+	    entityBtnNew.setName("");
 	}
 
-	this.loadFormWindow(auxEntityBtnNew, "New Department");
+	this.loadFormWindow(entityBtnNew, "New Department");
     }
 
     @Override
