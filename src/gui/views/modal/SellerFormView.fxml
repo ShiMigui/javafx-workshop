@@ -33,8 +33,8 @@
          <children>
             <TextField fx:id="txfId" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
             <TextField fx:id="txfEmail" layoutX="240.0" layoutY="13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="email@example.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txfName" editable="false" layoutX="116.0" layoutY="13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Your name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txfSalary" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="US$ 9999.99" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txfName" layoutX="116.0" layoutY="13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Your name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txfSalary" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="US$ 9999.99" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <DatePicker fx:id="txfBirthDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="01/01/2000" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <ComboBox fx:id="cmbDepartment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="Id" />

@@ -1,6 +1,7 @@
 package gui.views.modal;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -11,6 +12,7 @@ import gui.alerts.Alerts;
 import gui.elements.ComboList;
 import gui.utils.TextfieldConstraint;
 import gui.utils.Utils;
+import gui.utils.ValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -89,10 +91,10 @@ public class SellerFormController extends EntityFormController<Seller> {
 	txfEmail.setText(email);
 	txfSalary.setText(salary);
 	txfBirthDate.setValue(LocalDate.ofInstant(birthDate.toInstant(), ZoneId.systemDefault()));
-	
-	if(department != null)
+
+	if (department != null)
 	    cmbDepartment.setValue(department);
-	else 
+	else
 	    cmbDepartment.getSelectionModel().selectFirst();
     }
 
@@ -100,24 +102,69 @@ public class SellerFormController extends EntityFormController<Seller> {
     @Override
     protected void onBtnDoneAction() {
 	try {
-	    String name = txfName.getText();
+	    updateEntity();
 
-	    if (name == null || name.trim().equals("")) {
-		txfName.requestFocus();
-		throw new NullPointerException("Name cannot be null or empty!");
-	    }
-
-	    Seller obj = getAuxEntity();
-	    obj.setName(name);
-
-	    getService().insertOrUpdate(obj);
+	    getService().insertOrUpdate(getAuxEntity());
 	    notifyDataChanged();
 	    close();
-	} catch (NullPointerException e) {
+	} catch (ValidationException e) {
 	    Alerts.showAlert(AlertType.ERROR, "Error", e.getMessage());
 	} catch (RuntimeException e) {
 	    Alerts.showAlert(AlertType.ERROR, "Unexpected Error", e.getMessage());
 	}
+    }
+
+    private void updateEntity() throws ValidationException {
+	Locale.setDefault(Locale.US);
+	String name = txfName.getText();
+	String email = txfEmail.getText();
+	String salaryText = txfSalary.getText();
+	Double salary = null;
+	Department dep = cmbDepartment.getValue();
+	LocalDate localDate = txfBirthDate.getValue();
+	
+
+	if (name == null || name.trim().equals("")) {
+	    txfName.requestFocus();
+	    throw new ValidationException("Name cannot be empty!");
+	}
+
+	if (email == null || email.trim().equals("")) {
+	    txfEmail.requestFocus();
+	    throw new ValidationException("Email cannot be empty!");
+	}
+
+	if (!email.contains("@")) {
+	    txfEmail.requestFocus();
+	    throw new ValidationException("Email not valid!");
+	}
+
+	if (salaryText == null || salaryText.trim().equals("")) {
+	    txfSalary.requestFocus();
+	    throw new ValidationException("Salary cannot be empty!");
+	}
+
+	try {
+	    salary = Double.parseDouble(salaryText);
+	} catch (NumberFormatException e) {
+	    txfSalary.requestFocus();
+	    throw new ValidationException("Salary must be a double number!");
+	}
+	
+	if (localDate == null) {
+	    txfBirthDate.requestFocus();
+	    throw new ValidationException("Birth date cannot be empty!");
+	}
+	
+	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+	Date date = Date.from(instant);
+	
+	Seller obj = getAuxEntity();
+	obj.setName(name);
+	obj.setEmail(email);
+	obj.setSalary(salary);
+	obj.setDepartment(dep);
+	obj.setBirthDate(date);
     }
 
     @FXML
