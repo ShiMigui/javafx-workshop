@@ -6,8 +6,8 @@ import java.util.ResourceBundle;
 
 import gui.alerts.Alerts;
 import gui.alerts.Confirmations;
-import gui.buttons.EditActButton;
-import gui.buttons.RemoveActButton;
+import gui.elements.EditActButton;
+import gui.elements.RemoveActButton;
 import gui.interfaces.IDataChangedController;
 import gui.utils.IndexContentManager;
 import gui.utils.WindowManager;

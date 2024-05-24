@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import gui.buttons.FormatDateCell;
-import gui.buttons.FormatDoubleCell;
+import gui.elements.FormatDateCell;
+import gui.elements.FormatDoubleCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;

@@ -1,4 +1,4 @@
-package gui.buttons;
+package gui.elements;
 
 import java.util.function.Consumer;
 

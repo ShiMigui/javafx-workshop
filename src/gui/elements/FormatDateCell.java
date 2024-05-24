@@ -1,4 +1,4 @@
-package gui.buttons;
+package gui.elements;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
