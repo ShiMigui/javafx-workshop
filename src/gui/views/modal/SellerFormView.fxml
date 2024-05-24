@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,7 +16,7 @@
       <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
    </padding>
    <children>
-      <GridPane>
+      <GridPane hgap="5.0" vgap="5.0">
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="136.66665649414062" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.3333435058594" minWidth="10.0" prefWidth="323.3333435058594" />
@@ -23,12 +24,21 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="txfId" editable="false" GridPane.columnIndex="1" />
-            <TextField fx:id="txfName" layoutX="240.0" layoutY="13.0" promptText="ex.: &quot;Cars&quot;, &quot;Toys&quot;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txfId" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+            <TextField fx:id="txfEmail" layoutX="240.0" layoutY="13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="email@example.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Id" />
-            <Label layoutX="73.0" layoutY="17.0" text="Name" GridPane.rowIndex="1" />
+            <Label layoutX="73.0" layoutY="17.0" text="Email" GridPane.rowIndex="1" />
+            <TextField fx:id="txfName" editable="false" layoutX="116.0" layoutY="13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Your name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="47.0" text="Name" GridPane.rowIndex="2" />
+            <Label layoutX="10.0" layoutY="77.0" text="Birth Date" GridPane.rowIndex="4" />
+            <TextField fx:id="txfSalary" editable="false" layoutX="10.0" layoutY="103.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="US$ 9999.99" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label layoutX="10.0" layoutY="107.0" text="Salary" GridPane.rowIndex="3" />
+            <DatePicker fx:id="txfBirthDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="01/01/2000" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" spacing="20.0">
@@ -40,10 +50,5 @@
             <Insets top="15.0" />
          </padding>
       </HBox>
-      <Label textFill="RED">
-         <padding>
-            <Insets top="10.0" />
-         </padding>
-      </Label>
    </children>
 </VBox>

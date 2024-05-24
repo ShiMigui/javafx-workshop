@@ -26,7 +26,7 @@ public class SellerDao implements IEntityDao<Seller> {
 	try {
 	    String name = rs.getString("nm_seller");
 	    String email = rs.getString("nm_email");
-	    Date birth = rs.getDate("dt_birth");
+	    Date birth = new java.util.Date(rs.getDate("dt_birth").getTime());
 	    Double salary = rs.getDouble("vl_salary");
 	    Integer departmentId = rs.getInt("cd_department");
 

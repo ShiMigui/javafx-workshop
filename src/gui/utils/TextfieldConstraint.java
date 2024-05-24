@@ -13,7 +13,7 @@ public final class TextfieldConstraint {
     }
 
     public static void asDecimalInput(TextField txf) {
-	addAConstraint(txf, (newV) -> newV.matches("\\d*([\\.]\\d*)?*"));
+	addAConstraint(txf, (newV) -> newV.matches("\\d*(\\.\\d*)?"));
     }
 
     public static void maxLengthInput(TextField txf, Integer max) {
