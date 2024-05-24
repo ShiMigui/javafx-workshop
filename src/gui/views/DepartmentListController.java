@@ -59,4 +59,14 @@ public class DepartmentListController extends EntityListController<Department> {
     protected TableView<Department> getTable() {
 	return table;
     }
+
+    @Override
+    protected TableColumn<Department, Department> getRemoveColumn() {
+	return this.tbColumnRemove;
+    }
+
+    @Override
+    protected TableColumn<Department, Department> getEditColumn() {
+	return this.tbColumnEdit;
+    }
 }
