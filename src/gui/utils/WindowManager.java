@@ -17,9 +17,9 @@ public class WindowManager {
 
     public void window(String relative, String name, Stage owner, Consumer<Stage> config) {
 	try {
-	    if(stage == null)
+	    if (stage == null)
 		stage = new Stage();
-	    
+
 	    loader.getResource(relative);
 	    Parent node = loader.load();
 

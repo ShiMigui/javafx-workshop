@@ -50,7 +50,7 @@ public abstract class EntityListController<E extends IEntity> implements IDataCh
     protected void loadFormWindowLikeConsumer(E obj) {
 	loadFormWindow(obj, "Edit entity");
     }
-    
+
     protected void loadFormWindow(E obj, String windowName) {
 	try {
 	    if (wm.getWindow() == null)
@@ -73,7 +73,7 @@ public abstract class EntityListController<E extends IEntity> implements IDataCh
 	setCellValueFactory(column);
 	column.setCellFactory(param -> new RemoveActButton<E>(this::removeEntity));
     }
-    
+
     protected void addEditButtons(TableColumn<E, E> column) {
 	setCellValueFactory(column);
 	column.setCellFactory(param -> new EditActButton<E>(this::loadFormWindowLikeConsumer));
@@ -90,7 +90,7 @@ public abstract class EntityListController<E extends IEntity> implements IDataCh
 
 	    if (resp.get() == ButtonType.OK)
 		service.remove(obj);
-	    
+
 	    this.updateTable();
 	} catch (RuntimeException e) {
 	    Alerts.showAlert(AlertType.ERROR, "Cannot remove \"" + obj.getName() + "\"", e.getMessage());

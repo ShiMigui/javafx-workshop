@@ -8,8 +8,8 @@ import model.interfaces.IEntity;
 
 public class LocalData<E extends IEntity> {
     private Map<Integer, E> map = new HashMap<>();
-    
-    protected LocalData(){
+
+    protected LocalData() {
     }
 
     public E get(Integer id) {
@@ -29,19 +29,19 @@ public class LocalData<E extends IEntity> {
 
     public E remove(Integer id) {
 	E obj = get(id);
-	
-	if(obj == null)
+
+	if (obj == null)
 	    throw new NullPointerException("There is not an object with id = " + id);
-	
+
 	map.remove(id);
-	
+
 	return obj;
     }
-    
-    public Collection<E> getAll(){
+
+    public Collection<E> getAll() {
 	return map.values();
     }
-    
+
     private Map<Integer, E> getMap() {
 	return map;
     }

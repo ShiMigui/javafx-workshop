@@ -22,18 +22,18 @@ public final class DepartmentDao implements IEntityDao<Department> {
     @Override
     public Department convert(Integer id, ResultSet rs) {
 	DepartmentLocalData local = LocalDataFactory.getLocalDepartments();
-	try {	    
+	try {
 	    String name = rs.getString("nm_department");
-	    
+
 	    Department obj = local.get(id);
-	    if(obj == null) {
+	    if (obj == null) {
 		obj = new Department();
 		obj.setId(id);
 		local.put(obj);
 	    }
-	    
+
 	    obj.setName(name);
-	    
+
 	    return obj;
 	} catch (SQLException e) {
 	    throw new DaoException("Cannot convert ResultSet: " + e.getMessage());
@@ -122,7 +122,7 @@ public final class DepartmentDao implements IEntityDao<Department> {
 
 	    if (st.executeUpdate() == 0)
 		throw new DaoException("Unexpected error: Cannot delete department(" + id + ")!");
-	    
+
 	    LocalDataFactory.getLocalDepartments().remove(id);
 	} catch (SQLException e) {
 	    throw new DaoException("Cannot delete department(" + id + "): " + e.getMessage());

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface IEntity extends Serializable {
     Integer getId();
-    
+
     String getName();
 
     default String normalize(String txt) {

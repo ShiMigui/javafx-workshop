@@ -122,7 +122,6 @@ public class SellerFormController extends EntityFormController<Seller> {
 	Double salary = null;
 	Department dep = cmbDepartment.getValue();
 	LocalDate localDate = txfBirthDate.getValue();
-	
 
 	if (name == null || name.trim().equals("")) {
 	    txfName.requestFocus();
@@ -150,15 +149,15 @@ public class SellerFormController extends EntityFormController<Seller> {
 	    txfSalary.requestFocus();
 	    throw new ValidationException("Salary must be a double number!");
 	}
-	
+
 	if (localDate == null) {
 	    txfBirthDate.requestFocus();
 	    throw new ValidationException("Birth date cannot be empty!");
 	}
-	
+
 	Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 	Date date = Date.from(instant);
-	
+
 	Seller obj = getAuxEntity();
 	obj.setName(name);
 	obj.setEmail(email);
